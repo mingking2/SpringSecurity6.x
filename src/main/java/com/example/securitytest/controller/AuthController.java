@@ -9,18 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
 @Slf4j
-public class UserController {
+public class AuthController {
 
     private final UserService userService;
     JwtUtil jwtUtil;
@@ -67,8 +66,13 @@ public class UserController {
 
     @GetMapping("/user/search")
     public void searchUser(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        System.out.println("username: " +userDetails.getUsername());
-        System.out.println("pwd: " +userDetails.getPassword());
+        log.info("username: " +userDetails.getUsername());
+        log.info("pwd: " +userDetails.getPassword());
+    }
+
+    @GetMapping("/get-header")
+    public String getHeader(@RequestHeader("Authorization") String authorization) {
+        return userService.getHeaders(authorization);
     }
 
 }
