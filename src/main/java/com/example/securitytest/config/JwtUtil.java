@@ -5,21 +5,18 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.security.Principal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
 @Slf4j
 public class JwtUtil {
-    @Value("${haden.jwtSecret}")
+    @Value("${hidden.jwtSecret}")
     private String jwtSecret;
     private final long ACCESS_TOKEN_VALID_PERIOD = 1000L*60*30;
     private final long REFRESH_TOKEN_VALID_PERIOD = 1000L*60*60*24*7;
