@@ -59,4 +59,9 @@ public class UserService {
 
         throw new IllegalArgumentException("패스워드가 다름");
     }
+
+    public String getHeaders(String authorization) {
+        // 인증
+        return authorization;
+    }
 }
